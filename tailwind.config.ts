@@ -13,15 +13,17 @@ const config: Config = {
           DEFAULT: "#F3F1EC",
           tint: "#EBE8E0",
           card: "#E8E5DC",
+          soft: "#F7F5F0",
         },
         ink: {
           DEFAULT: "#090909",
-          muted: "#72706A", // The single authoritative neutral gray
+          muted: "#72706A",
           faint: "#9C988F",
         },
         line: {
           DEFAULT: "#D5D1C6",
           subtle: "#E2DFD7",
+          soft: "#EAE8E1",
         },
         signal: {
           red: "#FF2E2E",
@@ -30,11 +32,11 @@ const config: Config = {
           DEFAULT: "#090909",
           surface: "#111111",
           border: "#222222",
-        }
+        },
       },
       fontFamily: {
-        sans: ["var(--font-display)", "General Sans", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "General Sans", "system-ui", "sans-serif"],
+        sans: ["var(--font-display)", "Space Grotesk", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Space Grotesk", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
       },
       letterSpacing: {
@@ -51,6 +53,21 @@ const config: Config = {
       },
       gridTemplateColumns: {
         "12-editorial": "repeat(12, minmax(0, 1fr))",
+      },
+      transitionTimingFunction: {
+        editorial: "cubic-bezier(0.16, 1, 0.3, 1)",
+      },
+      transitionDuration: {
+        editorial: "320ms",
+      },
+      keyframes: {
+        "redline-draw": {
+          from: { transform: "scaleX(0)" },
+          to: { transform: "scaleX(1)" },
+        },
+      },
+      animation: {
+        "redline-draw": "redline-draw 1.1s cubic-bezier(0.16,1,0.3,1) forwards",
       },
     },
   },

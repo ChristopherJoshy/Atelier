@@ -1,115 +1,115 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { EXPERIMENTS } from "@/lib/experiments";
 
 export function ExperimentsSpotlight() {
-  // Take the first 3 experiments including Kaggriculture
   const spotlightExperiments = EXPERIMENTS.slice(0, 3);
 
   return (
     <section
       id="experiments"
-      className="py-16 md:py-24 px-6 md:px-12 border-b border-ink/15 bg-paper relative"
+      className="py-16 md:py-24 border-b border-line bg-paper relative"
       aria-label="Engineering Research Notebook Spotlight"
     >
-      {/* Section Header */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pb-10 border-b border-ink/15">
-        <div className="md:col-span-5">
-          <span className="meta-mono-sm block text-ink-faint">STAGE 03 // RESEARCH NOTEBOOK</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter uppercase text-ink mt-1">
-            ENGINEERING NOTEBOOK
-          </h2>
-        </div>
+      <div className="container-editorial section-pad">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] as const }}
+          className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 pb-8 md:pb-10 border-b border-line"
+        >
+          <div className="md:col-span-5">
+            <span className="meta-mono-sm block">STAGE 03 // RESEARCH NOTEBOOK</span>
+            <h2 className="text-[30px] sm:text-4xl md:text-5xl font-bold tracking-tighter uppercase text-ink mt-2 leading-[0.9]">
+              ENGINEERING NOTEBOOK
+            </h2>
+          </div>
 
-        <div className="md:col-span-4 flex items-end">
-          <p className="font-sans text-sm text-ink-muted max-w-md leading-relaxed">
-            Empirical hypotheses, test fixtures, and mathematical optimizations.
-            Real engineering documents failures transparently to build superior architectures.
-          </p>
-        </div>
+          <div className="md:col-span-4 flex items-end">
+            <p className="font-sans text-[14px] md:text-[15px] text-ink-muted max-w-md leading-[1.6]">
+              Hypothesis-driven log: empirical tests, instructive failures, and repeatable observations preserved transparently.
+            </p>
+          </div>
 
-        <div className="md:col-span-3 flex md:flex-col md:items-end justify-between font-mono text-xs text-ink-muted">
-          <span className="text-ink-faint">METHODOLOGY</span>
-          <span className="text-ink font-bold">HYPOTHESIS ➔ BENCHMARK</span>
-          <Link
-            href="/experiments"
-            className="hover:text-signal-red transition-colors underline decoration-ink/20 font-bold"
-          >
-            ALL EXPERIMENTS →
-          </Link>
-        </div>
-      </div>
+          <div className="md:col-span-3 flex md:flex-col md:items-end justify-between gap-2 font-mono text-xs text-ink-muted">
+            <span className="text-ink-faint text-[11px] tracking-[0.12em] uppercase">METHODOLOGY</span>
+            <span className="text-ink font-bold text-[12px] tracking-wide">HYPOTHESIS ➔ BENCHMARK</span>
+            <Link href="/experiments" className="text-signal-red font-bold hover:underline underline-offset-4 text-[13px] mt-1">
+              VIEW FULL NOTEBOOK →
+            </Link>
+          </div>
+        </motion.div>
 
-      {/* Experiments Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-10">
-        {spotlightExperiments.map((exp) => {
-          const isPartial = exp.result === "PARTIAL";
-          const isSuccess = exp.result === "SUCCESS";
-          const isFailed = exp.result === "FAILED";
+        {/* Experiments Grid — editorial, not dashboard */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6 pt-8 md:pt-10">
+          {spotlightExperiments.map((exp, idx) => {
+            const isFailed = exp.result === "FAILED";
+            const isPartial = exp.result === "PARTIAL";
+            const isSuccess = exp.result === "SUCCESS";
 
-          return (
-            <article
-              key={exp.id}
-              className="p-6 md:p-8 bg-paper-tint border border-ink/15 flex flex-col justify-between space-y-6 hover:border-ink transition-colors"
-            >
-              <div className="space-y-4">
-                <div className="flex justify-between items-baseline border-b border-ink/10 pb-3 font-mono text-xs">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-signal-red font-bold">{exp.num}</span>
-                    <span className="text-ink-faint">/</span>
-                    <span className="text-ink font-semibold uppercase">{exp.domain}</span>
+            return (
+              <motion.article
+                key={exp.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] as const }}
+                className="card-editorial p-6 md:p-7 flex flex-col justify-between overflow-hidden group"
+              >
+                <div className="space-y-5">
+                  <div className="flex justify-between items-baseline border-b border-line/60 pb-3.5 font-mono text-xs">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-signal-red font-bold text-[13px]">{exp.num}</span>
+                      <span className="text-ink-faint">/</span>
+                      <span className="text-ink font-semibold uppercase tracking-wide text-[11px]">{exp.domain}</span>
+                    </div>
+                    <span
+                      className={`px-2 py-1 text-[11px] font-bold uppercase tracking-[0.08em] border ${
+                        isSuccess
+                          ? "bg-ink text-paper border-ink"
+                          : isPartial
+                          ? "bg-signal-red text-white border-signal-red"
+                          : "bg-paper border-line text-ink"
+                      }`}
+                    >
+                      {exp.result}
+                    </span>
                   </div>
-                  <span
-                    className={`px-1.5 py-0.5 text-[0.65rem] font-bold uppercase ${
-                      isSuccess
-                        ? "bg-ink text-paper"
-                        : isPartial
-                        ? "bg-signal-red text-white"
-                        : "bg-paper border border-ink/20 text-ink"
-                    }`}
-                  >
-                    {exp.result}
-                  </span>
+
+                  <h3 className="text-[18px] md:text-[20px] font-bold uppercase text-ink leading-[1.15] tracking-tight">
+                    {exp.title}
+                  </h3>
+
+                  <div className="space-y-4 font-sans text-[13.5px] text-ink-muted">
+                    <div>
+                      <span className="meta-mono-sm block font-semibold opacity-80">[01 // HYPOTHESIS]</span>
+                      <p className="mt-1.5 leading-[1.6] line-clamp-3">{exp.hypothesis}</p>
+                    </div>
+
+                    <div>
+                      <span className="meta-mono-sm block font-semibold opacity-80">[02 // OBSERVATION]</span>
+                      <p className="mt-1.5 leading-[1.6] line-clamp-3">{exp.observation}</p>
+                    </div>
+                  </div>
                 </div>
 
-                <h3 className="text-lg md:text-xl font-bold uppercase text-ink leading-snug">
-                  {exp.title}
-                </h3>
-
-                <div className="space-y-3 font-sans text-xs text-ink-muted">
-                  <div>
-                    <span className="font-mono text-[0.65rem] text-ink-faint uppercase block font-semibold">
-                      [01 // HYPOTHESIS]
-                    </span>
-                    <p className="mt-0.5 leading-relaxed line-clamp-3">
-                      {exp.hypothesis}
-                    </p>
-                  </div>
-
-                  <div>
-                    <span className="font-mono text-[0.65rem] text-ink-faint uppercase block font-semibold">
-                      [02 // OBSERVATION]
-                    </span>
-                    <p className="mt-0.5 leading-relaxed line-clamp-3">
-                      {exp.observation}
-                    </p>
-                  </div>
+                {/* Bottom Metrics Bar — larger, breathing */}
+                <div className="pt-4 mt-6 border-t border-line/60 font-mono flex flex-col gap-2">
+                  {exp.metrics?.slice(0, 2).map((m) => (
+                    <div key={m.label} className="flex justify-between items-baseline gap-3 text-[12px]">
+                      <span className="text-ink-faint tracking-wide uppercase text-[11px]">{m.label}</span>
+                      <span className="text-ink font-bold text-right">{m.value}</span>
+                    </div>
+                  ))}
                 </div>
-              </div>
-
-              {/* Bottom Metrics Bar */}
-              <div className="pt-4 border-t border-ink/10 font-mono text-[0.68rem] flex flex-col gap-1.5">
-                {exp.metrics?.slice(0, 2).map((m) => (
-                  <div key={m.label} className="flex justify-between items-baseline">
-                    <span className="text-ink-faint">{m.label}</span>
-                    <span className="text-ink font-bold">{m.value}</span>
-                  </div>
-                ))}
-              </div>
-            </article>
-          );
-        })}
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

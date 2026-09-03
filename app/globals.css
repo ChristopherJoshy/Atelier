@@ -1,24 +1,45 @@
+/* ─────────────────────────────────────────────────────────────────
+   EDITORIAL MONOGRAPH DESIGN SYSTEM — Christopher Joshy Portfolio
+   next/font variables --font-display / --font-mono injected via layout.tsx
+   Tokens precise, motion cubic-bezier [0.16,1,0.3,1], paper tactile, redline semantic
+   ───────────────────────────────────────────────────────────────── */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Typography: General Sans (Fontshare) + JetBrains Mono (Google Fonts) */
-@import url('https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
-
+/* ── Design Contract: Tokens ─────────────────────────────────── */
 :root {
   --paper: #F3F1EC;
   --paper-tint: #EBE8E0;
   --paper-card: #E8E5DC;
+  --paper-soft: #F7F5F0;
   --ink: #090909;
   --ink-muted: #72706A;
   --ink-faint: #9C988F;
   --line: #D5D1C6;
   --line-subtle: #E2DFD7;
+  --line-soft: #EAE8E1;
   --signal-red: #FF2E2E;
-  --font-display: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  /* Fluid type scale — clamp ensures intentional rhythm at every viewport */
+  --text-monumental: clamp(2.85rem, 9vw, 10.5rem);
+  --text-monumental-sub: clamp(1.7rem, 4.2vw, 3.75rem);
+  --text-title: clamp(2rem, 5.8vw, 6rem);
+  --text-h2: clamp(1.5rem, 3.4vw, 3.4rem);
+  /* Editorial grid */
+  --max-editorial: 1600px;
+  --radius-editorial: 0px; /* zero radius = paper, not product */
+  /* Motion */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Anti-slop rules: NEVER purple/cyan, NEVER glass blur, NEVER 8px radius, 
+   NEVER generic gradient blob, NEVER dashboard card shadow bloom.
+   Color usage: signal-red semantic only (anomaly, surviving path, active state).
+   Imperfection: paper grain, hanging numbers, off-grid asymmetric columns, 
+   1.5px redline (not 1px hairline) to feel human-drawn. */
 
 html {
   background-color: var(--paper);
@@ -28,6 +49,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  font-size: 16px;
 }
 
 body {
@@ -36,90 +59,113 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   position: relative;
+  line-height: 1.6;
 }
 
-/* Subtle archival paper texture (physical print simulation) */
+/* ── Tactile Paper Texture — layered grain + fiber, ~2.8% opacity, human ── */
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.024;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.018;
+  background-image: repeating-linear-gradient(90deg, transparent 0, transparent 1px, rgba(9,9,9,0.04) 1px, transparent 2px);
+  background-size: 7% 100%;
 }
 
-/* Precision Selection */
+/* ── Selection ── */
 ::selection {
   background: var(--ink);
   color: var(--paper);
 }
 
-/* Signature Device: 1px Pure Vector Line (NO textual label "REDLINE" used) */
+/* ── Signature Redline — 1.5px human, not hairline ── */
 .sig-line-h {
-  height: 1px;
+  height: 1.5px;
   background-color: var(--signal-red);
   width: 100%;
 }
-
 .sig-line-v {
-  width: 1px;
+  width: 1.5px;
   background-color: var(--signal-red);
   height: 100%;
 }
 
-/* Hairline Grid & Rule Primitives */
-.border-line {
-  border-color: var(--line);
+/* Hairline rules */
+.border-line { border-color: var(--line); }
+.border-line-subtle { border-color: var(--line-subtle); }
+.border-line-soft { border-color: var(--line-soft); }
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ── Editorial Container — asymmetric breathing, ultra-wide center ── */
+.container-editorial {
+  width: 100%;
+  max-width: var(--max-editorial);
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-pad {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+@media (min-width: 640px) {
+  .section-pad { padding-left: 2rem; padding-right: 2rem; }
+}
+@media (min-width: 1024px) {
+  .section-pad { padding-left: 3rem; padding-right: 3rem; }
+}
+@media (min-width: 1440px) {
+  .section-pad { padding-left: 3.5rem; padding-right: 3.5rem; }
+}
+@media (min-width: 1920px) {
+  .section-pad { padding-left: 4rem; padding-right: 4rem; }
 }
 
-.border-line-subtle {
-  border-color: var(--line-subtle);
-}
-
-/* Lenis Smooth Scroll Integration */
-html.lenis, html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-/* Fluid Typography Primitives */
+/* ── Fluid Typography — monumental but legible, -0.045 tracking ── */
 .display-monumental {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 10vw, 11rem);
+  font-size: var(--text-monumental);
   line-height: 0.88;
   letter-spacing: -0.045em;
   font-weight: 700;
   text-transform: uppercase;
   overflow-wrap: break-word;
   word-break: break-word;
+  hyphens: manual;
+  text-wrap: balance;
 }
-
 .display-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 6.5vw, 6.5rem);
-  line-height: 0.94;
+  font-size: var(--text-title);
+  line-height: 0.92;
   letter-spacing: -0.035em;
   font-weight: 700;
   text-transform: uppercase;
   overflow-wrap: break-word;
   word-break: break-word;
+  text-wrap: balance;
 }
-
 .editorial-h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 3.8vw, 3.8rem);
+  font-size: var(--text-h2);
   line-height: 1.02;
   letter-spacing: -0.03em;
   font-weight: 600;
@@ -127,56 +173,131 @@ html.lenis, html.lenis body {
   overflow-wrap: break-word;
   word-break: break-word;
 }
-
 .editorial-sub {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.8vw, 1.7rem);
-  line-height: 1.35;
+  font-size: clamp(1.0625rem, 1.6vw, 1.5rem);
+  line-height: 1.42;
   letter-spacing: -0.015em;
 }
 
+/* Mono labels — lifted to readable, editorial tracking */
 .meta-mono {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--ink-muted);
 }
-
 .meta-mono-sm {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
+  font-size: 0.70rem;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-muted);
+}
+.text-micro {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* Accessible focus ring */
+/* Focus ring — signal-red, not blue */
 :focus-visible {
   outline: 2px solid var(--signal-red);
   outline-offset: 3px;
 }
 
-/* Custom minimal scrollbar */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
+/* Scrollbar — tonal, no slop */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-muted); }
 
-::-webkit-scrollbar-track {
+/* Rules */
+.rule-soft { height: 1px; background: var(--line-subtle); }
+.rule-strong { height: 1px; background: var(--line); }
+
+/* ── Card Editorial — paper surface, hairline, no tint blob ── */
+.card-editorial {
   background: var(--paper);
+  border: 1px solid var(--line);
+  transition: border-color 0.32s var(--ease-editorial), transform 0.32s var(--ease-editorial);
+}
+.card-editorial:hover {
+  border-color: var(--ink);
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--line);
-  border-radius: 0px;
+/* Subtle tint variant only for archive/secondary — explicit */
+.card-editorial--tint {
+  background: var(--paper-tint);
+  border: 1px solid var(--line-subtle);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--ink-muted);
+/* Editorial index item — hanging number, no card */
+.index-item {
+  border-bottom: 1px solid var(--line-subtle);
+  transition: border-color 0.25s var(--ease-editorial), background 0.25s var(--ease-editorial);
+}
+.index-item--active {
+  border-left: 3px solid var(--signal-red);
+  background: var(--paper-tint);
+  border-bottom-color: var(--line);
 }
 
-/* Reduced motion preference */
+/* Redline draw */
+@keyframes redline-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.redline-draw {
+  transform-origin: left center;
+  animation: redline-draw 1.1s var(--ease-editorial) forwards;
+}
+
+/* Hanging numeral for index — editorial imperfection */
+.hanging-num {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  transform: translateX(-0.02em);
+}
+
+/* Asymmetric offset — editorial, not symmetric grid */
+.asym-offset {
+  margin-top: 0.35rem;
+}
+@media (min-width: 1024px) {
+  .asym-offset { margin-top: 0.85rem; }
+}
+
+/* Intentional ink bleed for display type — subtle, human */
+.ink-bleed {
+  text-shadow: 0 0 0.3px rgba(9,9,9,0.35);
+}
+
+/* Paper frame for art — thin rule + soft inset, not shadow blob */
+.art-frame {
+  border: 1px solid var(--line);
+  background: var(--paper-soft);
+  padding: 6px;
+}
+
+/* Terminal scroll — dark code block overflow affordance on mobile */
+.terminal-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(243, 241, 236, 0.22) transparent;
+  overscroll-behavior-x: contain;
+}
+.terminal-scroll::-webkit-scrollbar { height: 6px; }
+.terminal-scroll::-webkit-scrollbar-track { background: transparent; }
+.terminal-scroll::-webkit-scrollbar-thumb { background: rgba(243,241,236,0.22); }
+.terminal-scroll::-webkit-scrollbar-thumb:hover { background: rgba(243,241,236,0.35); }
+
+/* Reduced motion — respect, no cartoon springs */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
@@ -184,4 +305,23 @@ html.lenis, html.lenis body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .redline-draw { animation: none; transform: scaleX(1); }
+  body::before, body::after { display: none; }
+}
+
+/* Hide scrollbar for filter bars */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Editorial link underline — hairline, signal on hover */
+.link-editorial {
+  text-decoration: underline;
+  text-decoration-color: rgba(9,9,9,0.22);
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.25s var(--ease-editorial), color 0.25s var(--ease-editorial);
+}
+.link-editorial:hover {
+  text-decoration-color: var(--signal-red);
+  color: var(--signal-red);
 }

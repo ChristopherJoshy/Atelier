@@ -43,9 +43,10 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
   const isFeatured = project.tier === "featured" || isAnchor || isChadman || isGhostDeps;
 
   return (
-    <article className="min-h-screen bg-paper text-ink pt-20 pb-24 px-6 md:px-12 selection:bg-black selection:text-paper">
+    <article className="min-h-screen bg-paper text-ink pt-20 pb-24 selection:bg-black selection:text-paper">
+      <div className="container-editorial section-pad">
       {/* 01. NAVIGATION BACK LINK & METADATA BREADCRUMB */}
-      <div className="border-b border-ink/15 pb-6 mb-10 pt-4 flex flex-col sm:flex-row justify-between sm:items-baseline gap-4">
+      <div className="border-b border-line pb-6 mb-10 pt-4 flex flex-col sm:flex-row justify-between sm:items-baseline gap-4">
         <div className="flex items-baseline gap-3">
           <Link
             href="/work"
@@ -63,19 +64,19 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
           <span>YEAR: {project.year}</span>
           <span>STATUS: <strong className="text-ink">{project.status}</strong></span>
           {project.verified && (
-            <span className="text-signal-red font-bold">● VERIFIED RECORD</span>
+            <span className="text-signal-red font-bold whitespace-nowrap">● VERIFIED RECORD</span>
           )}
         </div>
       </div>
 
       {/* 02. HERO MONUMENTAL STATEMENT & ARTWORK */}
-      <section className="pb-16 border-b border-ink/15">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-6 space-y-6">
-            <span className="meta-mono-sm block text-ink-faint">
+      <section className="pb-16 border-b border-line">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          <div className="lg:col-span-6 space-y-6 min-w-0">
+            <span className="meta-mono-sm block">
               MONOGRAPH // {project.category.toUpperCase()}
             </span>
-            <h1 className="display-title tracking-tighter uppercase text-ink">
+            <h1 className="display-title tracking-tighter uppercase text-ink min-w-0 break-words">
               {project.heroStatement}
             </h1>
             {project.heroSubStatement && (
@@ -89,15 +90,15 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
 
             {/* Quick Metrics Strip */}
             {project.metrics && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-ink/10">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-line">
                 {project.metrics.map((m) => (
-                  <div key={m.label} className="p-3 bg-paper-tint border border-ink/15">
-                    <span className="meta-mono-sm block text-ink-faint">{m.label}</span>
+                  <div key={m.label} className="p-3 card-editorial">
+                    <span className="meta-mono-sm block">{m.label}</span>
                     <span className={`text-xl md:text-2xl font-bold tracking-tight mt-0.5 block ${m.isHighlight ? "text-signal-red" : "text-ink"}`}>
                       {m.value}
                     </span>
                     {m.annotation && (
-                      <span className="font-mono text-[0.62rem] text-ink-muted block mt-0.5">
+                      <span className="font-mono text-[11px] text-ink-muted block mt-0.5">
                         {m.annotation}
                       </span>
                     )}
@@ -109,10 +110,10 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
 
           {/* Interactive Vector Visual Metaphor Installation */}
           <div className="lg:col-span-6">
-            <div className="p-2 border border-ink/20 bg-paper-tint shadow-sm">
+            <div className="p-2 border border-line bg-paper">
               <ProjectVisualArt slug={project.slug} />
             </div>
-            <p className="font-mono text-[0.65rem] text-ink-muted mt-2 text-right">
+            <p className="font-mono text-[11px] text-ink-muted mt-2 text-right">
               VISUAL METAPHOR: {project.visualMetaphor}
             </p>
           </div>
@@ -120,10 +121,10 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
       </section>
 
       {/* 03. PROBLEM & INSIGHT (SPLIT EDITORIAL SECTION) */}
-      <section className="py-16 border-b border-ink/15">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <section className="py-16 md:py-20 border-b border-line">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10">
           <div className="md:col-span-3">
-            <span className="meta-mono-sm text-ink-faint block mb-1">SECTION 01 // ANALYSIS</span>
+            <span className="meta-mono-sm block mb-1">SECTION 01 // ANALYSIS</span>
             <h2 className="editorial-h2 text-ink">THE ASYMMETRY</h2>
           </div>
 
@@ -134,7 +135,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
             </p>
           </div>
 
-          <div className="md:col-span-5 space-y-3 border-l md:border-ink/15 pl-0 md:pl-8">
+          <div className="md:col-span-5 space-y-3 border-l md:border-line pl-0 md:pl-8">
             <span className="meta-mono text-ink font-bold block">[THE PHYSICAL INSIGHT]</span>
             <p className="font-sans text-sm md:text-base text-ink-muted leading-relaxed">
               {project.insight}
@@ -147,10 +148,10 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
       {isAnchor && (
         <>
           {/* SCREEN 04/05: THE SIX SENSOR PHYSICS CHECKS */}
-          <section className="py-16 border-b border-ink/15">
+          <section className="py-16 md:py-20 border-b border-line">
             <div className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
               <div>
-                <span className="meta-mono-sm text-ink-faint block mb-1">SECTION 02 // SENSOR FUSION ENGINE</span>
+                <span className="meta-mono-sm block mb-1">SECTION 02 // SENSOR FUSION ENGINE</span>
                 <h2 className="display-title text-ink">SIX INDEPENDENT PHYSICS CHECKS</h2>
               </div>
               <span className="font-mono text-xs text-signal-red font-bold">
@@ -162,7 +163,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
               {project.physicsChecks?.map((check, i) => (
                 <div
                   key={check.name}
-                  className="p-6 bg-paper-tint border border-ink/15 flex flex-col justify-between space-y-4 hover:border-ink transition-colors"
+                  className="p-6 card-editorial flex flex-col justify-between space-y-4 hover:border-ink transition-colors"
                 >
                   <div>
                     <div className="flex justify-between items-baseline mb-2 font-mono text-xs">
@@ -177,8 +178,8 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-ink/10 font-mono text-xs">
-                    <span className="meta-mono-sm text-ink-faint block">THRESHOLD BOUND</span>
+                  <div className="pt-4 border-t border-line font-mono text-xs">
+                    <span className="meta-mono-sm block">THRESHOLD BOUND</span>
                     <span className="text-ink font-bold">{check.threshold}</span>
                   </div>
                 </div>
@@ -187,9 +188,9 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
           </section>
 
           {/* SCREEN 06/07: RAIM/FDE DETERMINISTIC STATE MACHINE */}
-          <section className="py-16 border-b border-ink/15">
+          <section className="py-16 md:py-20 border-b border-line">
             <div className="mb-10">
-              <span className="meta-mono-sm text-ink-faint block mb-1">SECTION 03 // SAFETY CONTROLLER</span>
+              <span className="meta-mono-sm block mb-1">SECTION 03 // SAFETY CONTROLLER</span>
               <h2 className="display-title text-ink">GRUMPY RECOVERY STATE MACHINE</h2>
               <p className="text-sm text-ink-muted mt-2 max-w-xl font-sans">
                 Aviation-inspired RAIM/FDE architecture. DENIED state never trusts coordinates directly.
@@ -212,12 +213,12 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
                         : isRecovering
                         ? "bg-paper-card border-ink/30 text-ink"
                         : isTrusted
-                        ? "bg-paper-tint border-ink/20 text-ink"
-                        : "bg-paper border-ink/15 text-ink"
+                        ? "bg-paper border-line text-ink"
+                        : "bg-paper border-line text-ink"
                     }`}
                   >
                     <div>
-                      <span className={`font-mono text-[0.65rem] tracking-widest uppercase block mb-2 ${isDenied ? "text-white/70" : "text-ink-faint"}`}>
+                      <span className={`font-mono text-[11px] tracking-widest uppercase block mb-2 ${isDenied ? "text-white/70" : "text-ink-faint"}`}>
                         STATE TRANSITION
                       </span>
                       <h3 className="text-2xl font-bold tracking-tight uppercase">
@@ -228,7 +229,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
                       </p>
                     </div>
 
-                    <div className={`pt-4 mt-6 border-t font-mono text-[0.68rem] ${isDenied ? "border-white/20 text-white/80" : "border-ink/10 text-ink-muted"}`}>
+                    <div className={`pt-4 mt-6 border-t font-mono text-[12px] ${isDenied ? "border-white/20 text-white/80" : "border-line text-ink-muted"}`}>
                       <strong>RULE:</strong> {sm.transitionRule}
                     </div>
                   </div>
@@ -238,10 +239,10 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
           </section>
 
           {/* SCREEN 08: TEST SUITE TELEMETRY & ADVISORY AI LAYER */}
-          <section className="py-16 border-b border-ink/15">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <section className="py-16 md:py-20 border-b border-line">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
               <div className="lg:col-span-5 space-y-4">
-                <span className="meta-mono-sm text-ink-faint block">SECTION 04 // REPRODUCIBILITY &amp; ADVISORY AI</span>
+                <span className="meta-mono-sm block">SECTION 04 // REPRODUCIBILITY &amp; ADVISORY AI</span>
                 <h2 className="editorial-h2 text-ink">
                   TEST SUITE &amp; ON-DEVICE NPU
                 </h2>
@@ -255,7 +256,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
                   but has zero control over safety gate transitions.
                 </p>
 
-                <div className="p-4 bg-paper-tint border border-ink/15 font-mono text-xs space-y-2">
+                <div className="p-4 card-editorial font-mono text-xs space-y-2">
                   <div className="flex justify-between">
                     <span className="text-ink-faint">TEST COMMAND</span>
                     <span className="text-ink font-bold">.venv/bin/pytest</span>
@@ -275,8 +276,8 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
                 </div>
               </div>
 
-              <div className="lg:col-span-7 font-mono text-xs bg-ink text-paper p-6 overflow-x-auto border border-ink shadow-sm space-y-1">
-                <div className="text-paper/40 pb-2 border-b border-paper/10 text-[0.65rem]">
+              <div className="lg:col-span-7 font-mono text-xs bg-ink text-paper p-6 overflow-x-auto terminal-scroll overscroll-x-contain border border-ink space-y-1">
+                <div className="text-paper/40 pb-2 border-b border-paper/10 text-[11px]">
                   // PYTHON SENSOR FUSION DEMO OUTPUT (Anchor---PoC)
                 </div>
                 <p className="text-paper/70">$ python examples/run_demo.py</p>
@@ -295,7 +296,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
           </section>
 
           {/* SCREEN 09: THE BENGALURU BATTLE 30-HOUR SPRINT & GRAND FINALS */}
-          <section className="py-16 border-b border-ink/15">
+          <section className="py-16 md:py-20 border-b border-line">
             <div className="mb-8">
               <span className="meta-mono-sm text-signal-red font-bold block mb-1">
                 DISPATCH // iQOO HACKATHON 2026 BENGALURU BATTLE
@@ -305,9 +306,9 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
               {/* Column 1: The Delivery Problem Scenario */}
-              <div className="lg:col-span-4 p-6 bg-paper-tint border border-ink/15 space-y-4">
+              <div className="lg:col-span-4 p-6 card-editorial space-y-4">
                 <span className="font-mono text-xs text-signal-red font-bold block">
                   01 // REAL-WORLD FRAUD VULNERABILITY
                 </span>
@@ -327,7 +328,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
               </div>
 
               {/* Column 2: The 30-Hour Termux / PRoot Sprint */}
-              <div className="lg:col-span-4 p-6 bg-paper-tint border border-ink/15 space-y-4">
+              <div className="lg:col-span-4 p-6 card-editorial space-y-4">
                 <span className="font-mono text-xs text-signal-red font-bold block">
                   02 // 30-HOUR PHONE RUNTIME SPRINT
                 </span>
@@ -379,7 +380,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
                       href="https://lnkd.in/gQ9JX-Hp"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-2.5 py-1 bg-paper text-ink font-mono text-[0.65rem] hover:bg-signal-red hover:text-white transition-colors"
+                      className="px-2.5 py-1 bg-paper text-ink font-mono text-[11px] hover:bg-signal-red hover:text-white transition-colors"
                     >
                       IDEA SUBMISSION ↗
                     </a>
@@ -387,7 +388,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
                       href="https://lnkd.in/gPX4Yxnt"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-2.5 py-1 bg-paper/20 text-paper border border-paper/30 font-mono text-[0.65rem] hover:border-paper transition-colors"
+                      className="px-2.5 py-1 bg-paper/20 text-paper border border-paper/30 font-mono text-[11px] hover:border-paper transition-colors"
                     >
                       STAGE DECK ↗
                     </a>
@@ -401,10 +402,10 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
 
       {/* 04B. CHADMAN-SPECIFIC BESPOKE BENCHMARK EXPERIENCE */}
       {isChadman && (
-        <section className="py-16 border-b border-ink/15">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <section className="py-16 md:py-20 border-b border-line">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             <div className="lg:col-span-5 space-y-4">
-              <span className="meta-mono-sm text-ink-faint block">SECTION 02 // JAX ACCELERATION &amp; BEAM SEARCH</span>
+              <span className="meta-mono-sm block">SECTION 02 // JAX ACCELERATION &amp; BEAM SEARCH</span>
               <h2 className="editorial-h2 text-ink">
                 POLICY TOURNAMENT LADDER
               </h2>
@@ -414,7 +415,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
                 dynamically before dominated trajectories waste CPU cycles.
               </p>
 
-              <div className="p-4 bg-paper-tint border border-ink/15 font-mono text-xs space-y-2">
+              <div className="p-4 card-editorial font-mono text-xs space-y-2">
                 <div className="flex justify-between">
                   <span className="text-ink-faint">BASE POLICY ELO</span>
                   <span className="text-ink font-bold">v15 (~929 Elo)</span>
@@ -430,8 +431,8 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
               </div>
             </div>
 
-            <div className="lg:col-span-7 font-mono text-xs bg-ink text-paper p-6 overflow-x-auto border border-ink shadow-sm space-y-1">
-              <div className="text-paper/40 pb-2 border-b border-paper/10 text-[0.65rem]">
+            <div className="lg:col-span-7 font-mono text-xs bg-ink text-paper p-6 overflow-x-auto terminal-scroll overscroll-x-contain border border-ink space-y-1">
+              <div className="text-paper/40 pb-2 border-b border-paper/10 text-[11px]">
                 // ORBIT WARS 2026 JAX FORWARD ROLLOUT TELEMETRY
               </div>
               <p className="text-paper/70">$ python train_ppo.py --env orbit_wars --workers 64</p>
@@ -448,10 +449,10 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
 
       {/* 04C. GHOST-DEPS-SPECIFIC BESPOKE BENCHMARK EXPERIENCE */}
       {isGhostDeps && (
-        <section className="py-16 border-b border-ink/15">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <section className="py-16 md:py-20 border-b border-line">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             <div className="lg:col-span-5 space-y-4">
-              <span className="meta-mono-sm text-ink-faint block">SECTION 02 // AST CRAWLER &amp; SLOPSQUATTING</span>
+              <span className="meta-mono-sm block">SECTION 02 // AST CRAWLER &amp; SLOPSQUATTING</span>
               <h2 className="editorial-h2 text-ink">
                 PARSING SYNTAX TREES
               </h2>
@@ -461,7 +462,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
                 with zero runtime evaluation risk.
               </p>
 
-              <div className="p-4 bg-paper-tint border border-ink/15 font-mono text-xs space-y-2">
+              <div className="p-4 card-editorial font-mono text-xs space-y-2">
                 <div className="flex justify-between">
                   <span className="text-ink-faint">PACKAGE</span>
                   <span className="text-ink font-bold">ghost-deps@0.1.5</span>
@@ -477,8 +478,8 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
               </div>
             </div>
 
-            <div className="lg:col-span-7 font-mono text-xs bg-ink text-paper p-6 overflow-x-auto border border-ink shadow-sm space-y-1">
-              <div className="text-paper/40 pb-2 border-b border-paper/10 text-[0.65rem]">
+            <div className="lg:col-span-7 font-mono text-xs bg-ink text-paper p-6 overflow-x-auto terminal-scroll overscroll-x-contain border border-ink space-y-1">
+              <div className="text-paper/40 pb-2 border-b border-paper/10 text-[11px]">
                 // GHOST-DEPS CLI RUNTIME OUTPUT
               </div>
               <p className="text-paper/70">$ npx ghost-deps scan ./src</p>
@@ -495,9 +496,9 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
       )}
 
       {/* 05. END-TO-END SYSTEM ARCHITECTURE PIPELINE */}
-      <section className="py-16 border-b border-ink/15">
+      <section className="py-16 md:py-20 border-b border-line">
         <div className="mb-10">
-          <span className="meta-mono-sm text-ink-faint block mb-1">SYSTEM ARCHITECTURE</span>
+          <span className="meta-mono-sm block mb-1">SYSTEM ARCHITECTURE</span>
           <h2 className="display-title text-ink">EXECUTION TOPOLOGY</h2>
         </div>
 
@@ -505,7 +506,7 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
           {project.architectureSteps.map((step) => (
             <div
               key={step.step}
-              className="p-6 bg-paper-tint border border-ink/15 space-y-2 hover:border-ink transition-colors"
+              className="p-6 card-editorial space-y-2 hover:border-ink transition-colors"
             >
               <span className="font-mono text-xs text-signal-red font-bold block">
                 STEP {step.step}
@@ -522,10 +523,10 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
       </section>
 
       {/* 06. MY ROLE & ENGINEERING DETAILS */}
-      <section className="py-16 border-b border-ink/15">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <section className="py-16 md:py-20 border-b border-line">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10">
           <div className="md:col-span-4 space-y-2">
-            <span className="meta-mono-sm text-ink-faint block">OWNERSHIP // RESPONSIBILITY</span>
+            <span className="meta-mono-sm block">OWNERSHIP // RESPONSIBILITY</span>
             <h2 className="editorial-h2 text-ink">
               {project.role}
             </h2>
@@ -537,10 +538,10 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
           </div>
 
           <div className="md:col-span-8 space-y-4">
-            <span className="meta-mono-sm text-ink-faint block">CORE CONTRIBUTIONS</span>
+            <span className="meta-mono-sm block">CORE CONTRIBUTIONS</span>
             <ul className="space-y-3">
               {project.roleDetails.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3 p-4 bg-paper-tint border border-ink/10">
+                <li key={idx} className="flex items-start gap-3 p-4 card-editorial">
                   <span className="font-mono text-xs text-signal-red font-bold">
                     0{idx + 1}
                   </span>
@@ -555,10 +556,10 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
       </section>
 
       {/* 07. VERIFIED RESULT & REPOSITORIES (CLOSING BLOCK) */}
-      <section className="pt-16">
+      <section className="pt-12 md:pt-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-6 space-y-4">
-            <span className="meta-mono-sm text-ink-faint block">VERIFIED OUTCOME</span>
+            <span className="meta-mono-sm block">VERIFIED OUTCOME</span>
             {project.achievement ? (
               <div>
                 <h3 className="display-title text-ink leading-none">
@@ -595,13 +596,14 @@ export default async function ProjectCaseStudyPage({ params }: CaseStudyProps) {
 
             <Link
               href="/work"
-              className="px-5 py-3 border border-ink/20 hover:border-ink bg-paper text-ink transition-all uppercase"
+              className="px-5 py-3 border border-line hover:border-ink bg-paper text-ink transition-all uppercase"
             >
               ← ALL CASE STUDIES
             </Link>
           </div>
         </div>
       </section>
+      </div>
     </article>
   );
 }
