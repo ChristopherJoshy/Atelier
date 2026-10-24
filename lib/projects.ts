@@ -7,7 +7,7 @@ export const PROJECTS: ProjectData[] = [
   {
     slug: "anchor",
     num: "01",
-    title: "Anchor",
+    title: "DeadReckon",
     year: "2026",
     status: "Finalist",
     tier: "featured",
@@ -111,8 +111,8 @@ export const PROJECTS: ProjectData[] = [
       year: "2026"
     },
     links: [
-      { label: "Anchor PoC (GitHub)", url: "https://github.com/ChristopherJoshy/Anchor---PoC", type: "github" },
-      { label: "Anchor Full Build (GitHub)", url: "https://github.com/ChristopherJoshy/Anchor---Full-Build-", type: "github" },
+      { label: "Anchor PoC (Attic)", url: "https://github.com/ChristopherJoshy/Attic/tree/master/Anchor---PoC", type: "github" },
+      { label: "DeadReckon (GitHub)", url: "https://github.com/ChristopherJoshy/DeadReckon", type: "github" },
       { label: "Idea Video (LinkedIn)", url: "https://lnkd.in/gQ9JX-Hp", type: "live" },
       { label: "Presentation Deck", url: "https://lnkd.in/gPX4Yxnt", type: "live" }
     ],
@@ -123,7 +123,7 @@ export const PROJECTS: ProjectData[] = [
   {
     slug: "chadman",
     num: "02",
-    title: "CHADMAN",
+    title: "OrbitWars",
     year: "2025—2026",
     status: "Research",
     tier: "featured",
@@ -156,8 +156,8 @@ export const PROJECTS: ProjectData[] = [
       { label: "Rollout Speed", value: "10,000 / ms", annotation: "JAX accelerated tensor sim" }
     ],
     links: [
-      { label: "Orbit Wars Heuristics Model", url: "https://github.com/ChristopherJoshy/Orbit-Wars-2026-herustrics-model", type: "github" },
-      { label: "Orbit Wars 2026 Engine", url: "https://github.com/ChristopherJoshy/Orbit-Wars-2026", type: "github" }
+      { label: "Orbit Wars heuristic source (Attic)", url: "https://github.com/ChristopherJoshy/Attic/tree/master/Orbit-Wars-2026-herustrics-model", type: "github" },
+      { label: "OrbitWars (GitHub)", url: "https://github.com/ChristopherJoshy/OrbitWars", type: "github" }
     ],
     featured: true,
     archive: false,
@@ -288,7 +288,7 @@ export const PROJECTS: ProjectData[] = [
   {
     slug: "forge",
     num: "06",
-    title: "Forge",
+    title: "Muse",
     year: "2026",
     status: "Research",
     tier: "secondary",
@@ -316,7 +316,7 @@ export const PROJECTS: ProjectData[] = [
       { label: "Target Audience", value: "100+ Students", annotation: "Campus deployment" }
     ],
     links: [
-      { label: "GitHub Repository", url: "https://github.com/ChristopherJoshy/Ideator-", type: "github" }
+      { label: "GitHub Repository", url: "https://github.com/ChristopherJoshy/Muse", type: "github" }
     ],
     featured: false,
     archive: false,
@@ -398,7 +398,7 @@ export const PROJECTS: ProjectData[] = [
   {
     slug: "josanshi",
     num: "09",
-    title: "Josanshi",
+    title: "Doula",
     year: "2026",
     status: "Production",
     tier: "secondary",
@@ -426,7 +426,7 @@ export const PROJECTS: ProjectData[] = [
       { label: "Hackathon", value: "Agents Assemble", annotation: "Healthcare AI Endgame" }
     ],
     links: [
-      { label: "GitHub Repository", url: "https://github.com/ChristopherJoshy/Agents-Assemble---The-Healthcare-AI-Endgame-Josanshi", type: "github" }
+      { label: "GitHub Repository", url: "https://github.com/ChristopherJoshy/Doula", type: "github" }
     ],
     featured: false,
     archive: false,
@@ -435,7 +435,7 @@ export const PROJECTS: ProjectData[] = [
   {
     slug: "nexus-wars",
     num: "10",
-    title: "Nexus Wars",
+    title: "Nexus-Wars",
     year: "2025",
     status: "Live",
     tier: "secondary",
@@ -503,7 +503,7 @@ export const PROJECTS: ProjectData[] = [
       { label: "Award", value: "National Finalist", annotation: "TECHASTH'26", isHighlight: true }
     ],
     links: [
-      { label: "GitHub Repository", url: "https://github.com/ChristopherJoshy/Sahayi-HackX-BlackCats", type: "github" }
+      { label: "GitHub Repository", url: "https://github.com/ChristopherJoshy/Sahayi", type: "github" }
     ],
     featured: false,
     archive: true,
@@ -512,7 +512,7 @@ export const PROJECTS: ProjectData[] = [
   {
     slug: "orix",
     num: "12",
-    title: "ORIX",
+    title: "Orix",
     year: "2026",
     status: "Live",
     tier: "archive",
@@ -549,7 +549,7 @@ export const PROJECTS: ProjectData[] = [
   {
     slug: "campuspulse",
     num: "13",
-    title: "CampusPulse / KTUcoin",
+    title: "Pulse",
     year: "2026",
     status: "Live",
     tier: "archive",
@@ -579,7 +579,7 @@ export const PROJECTS: ProjectData[] = [
     ],
     links: [
       { label: "Live Deployment", url: "https://kt-ucoin.vercel.app/", type: "live" },
-      { label: "GitHub Repository", url: "https://github.com/ChristopherJoshy/KTUcoin", type: "github" }
+      { label: "GitHub Repository", url: "https://github.com/ChristopherJoshy/Pulse", type: "github" }
     ],
     featured: false,
     archive: true,
@@ -624,7 +624,7 @@ export const PROJECTS: ProjectData[] = [
   {
     slug: "aura",
     num: "15",
-    title: "A.U.R.A",
+    title: "Aura",
     year: "2026",
     status: "Live",
     tier: "archive",
@@ -651,7 +651,7 @@ export const PROJECTS: ProjectData[] = [
       { label: "Hardware Node", value: "Raspberry Pi 4", annotation: "100% On-Premise Computer Vision", isHighlight: true }
     ],
     links: [
-      { label: "GitHub Repository", url: "https://github.com/ChristopherJoshy/A.U.R.A", type: "github" }
+      { label: "GitHub Repository", url: "https://github.com/ChristopherJoshy/Aura", type: "github" }
     ],
     featured: false,
     archive: true,
@@ -660,7 +660,7 @@ export const PROJECTS: ProjectData[] = [
   {
     slug: "z-shooter",
     num: "16",
-    title: "Z-Shooter",
+    title: "ZenStriker",
     year: "2025",
     status: "Live",
     tier: "archive",
@@ -697,7 +697,7 @@ export const PROJECTS: ProjectData[] = [
   {
     slug: "wikirunai",
     num: "17",
-    title: "WikiRunAI",
+    title: "WikiRun",
     year: "2025",
     status: "Live",
     tier: "archive",

@@ -43,7 +43,7 @@ flowchart LR
 ## ðŸš€ Run locally
 
 ```bash
-git clone https://github.com/ChristopherJoshy/atelier.git
+git clone https://github.com/ChristopherJoshy/Atelier.git
 cd atelier
 npm ci
 npm run dev
